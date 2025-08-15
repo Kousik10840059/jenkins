@@ -1,0 +1,86 @@
+Q We people are working on a common projects in same region but my server are in different zone I want to share projects details simultaneaously , Config Efs storage to mount on every server
+
+machine 1 : Amazon Linux, us-east-1a, new security group -> LAUNCH
+machine 2 : Ubuntu, us-east-1b, existing security group -> LAUNCH
+Search for EFS -> create file system -> set name(my-efs) -> VPC default -> create file system
+Connect all instances in the terminal
+*On machine 1:**
+
+rpmquery nfs-utils -> which is by default on amazon Linux
+
+systemctl start nfs-utils
+
+systemctl status nfs-utis
+
+
+
+
+
+**On machine 2:**
+
+sudo su -
+
+apt update
+
+apt install nfs-common (nfs-common is name of the package in ubuntu)
+
+systemctl start nfs-utils.service
+
+create folder in all 3 instances - mkdir /name
+
+
+
+create a security group in AWS and allow port 2049 in inbound rules NFS
+
+Go to instance -> security group -> Inbound rules NFS -> 2049 -> save
+
+
+
+Go to EFS - > network and in the zone you have deployed your machines -> remove their default security group and choose your own created.
+
+
+
+-Now go to file system ( search for EFS )
+
+select my-efs and attach it
+
+Mount via DNS
+
+sudo 
+
+Come to the instance and paste the DNS client command(In the EFS) in the instances with /foldername --> remove the efs thing from link
+
+create folder in all 3 instances - mkdir /name
+
+
+
+create a security group in AWS and allow port 2049 in inbound rules NFS
+
+Go to instance -> security group -> Inbound rules NFS -> 2049 -> save
+
+
+
+Go to EFS - > network and in the zone you have deployed your machines -> remove their default security group and choose your own created.
+
+
+
+-Now go to file system ( search for EFS )
+
+select my-efs and attach it
+
+Mount via DNS
+
+sudo 
+
+Come to the instance and paste the DNS client command(In the EFS) in the instances with /foldername --> remove the efs thing from link
+
+Last two part is optional
+
+ADD ZONE IN EFS 
+
+
+
+Go to EFS -> my-efs-> add mount target and allow new zone if needed
+
+
+
