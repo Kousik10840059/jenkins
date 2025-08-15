@@ -1,0 +1,122 @@
+Q Create a Aws S3 bucket mount on linux machine and from there upload files
+Go to Amazon S3
+
+  create a bucket
+
+  bucket name should be unique
+
+  untick block all access
+
+  disable ACL
+
+  create bucket
+
+  select the bucket
+
+  upload ( add files / folders )
+
+ 
+
+select the file -> copy the link from properties and paste -> access will be denied
+
+FULL ACCESS
+
+Go to S3 bucket -> select it -> permission -> ACL -> enable
+
+CONTENT BASED ACCESS
+
+or enable a single files ACL - by selecting the file and enabling ACL.
+
+
+IF VERSIONING IS ENABLED IN YOUR S3 BUCKET - YOU CAN RETAIN DATA EVEN AFTER DELETING IT.
+
+SO MAKE SURE TO ALWAYS ENABLE VERSIONING WHILE CREATING A BUCKET
+
+TO EDIT AFTER CREATING ->
+
+Select bucket
+
+Properties
+
+bucket versioning
+
+Enable it -> read, write enable
+
+Go to bucket -> delete some data
+
+Now enable show version to see the data deleted
+
+click on the deleted data -> and you can download it
+
+then upload it
+
+In AWS
+
+  create instance
+
+  connect -> yum update -y
+
+  yum install -y automake fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+
+ Git clone -
+
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+
+Move to s3fs-fuse
+
+cd s3fs-fuse
+
+./autogen.sh
+
+./configure --prefix=/usr --with-openssl
+
+make
+
+sudo make install
+
+to verify package
+
+which s3fs
+
+then cd
+
+In amazon
+
+Go to IAM - USERS
+
+Attach policies
+
+Give him S3full access right
+
+Create it
+
+Go to Users - select your user
+
+create access key -> select CLI
+
+download the csv file or copy the id and password
+
+Create new file to store the passwd
+
+touch /etc/passwd-s3fs
+
+Paste it in the vim/etc/passwd-s3fs ( id:password)
+
+Change the permission of the file
+
+ sudo chmod 640 /etc/passwd-s3fs
+
+For mounting to s3 bucket
+
+s3fs bucketname /mnt -o passwd_file=/etc/passwd-s3fs
+
+ /mnt is the folder name where the data will be stored
+
+cd /mnt
+
+ls -a (to check the file)
+
+create files in it - it will also reflect in s3
+
+
+
