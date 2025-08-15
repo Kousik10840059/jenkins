@@ -2,7 +2,7 @@ Q My company is running e-commerce worload on a webserverr during the sale, serv
 
 create 4 instances in different zones - same security group
 
-Go to load balancing
+Go to load balancing 
 
 Create Target group
 
@@ -16,7 +16,9 @@ select the zones in which you had made the instances (a,b,c,d)
 
 select the same security group as instance
 
-select http and target group then create target group
+select http and target group then create target group 
+(Then click on your created tg and then in below select register target below add port
+Only if the page doest work)
 
 Now go to load balancer
 
