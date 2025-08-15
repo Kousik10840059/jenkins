@@ -88,3 +88,76 @@ then create snapshot of the volume
 then go to snapshot - create volume from snapshot
 
 and select new availability zone
+select the volume from ebs
+
+actions
+
+create snapshot
+
+give description \& click on create snapshot
+
+
+
+Now go to Snapshots -> wait for status to be completed
+
+
+
+Now select the snapshot -> actions -> copy snapshot -> choose destination - us-east-2 
+
+and click on copy snapshot
+
+
+
+
+
+Change the region to Ohio \& check the snapshot
+
+
+
+Now in Ohio region
+
+Create a new instance and launch it as we do with us-east-2a subnet
+
+
+
+Connect to the instance in terminal
+
+sudo su -
+
+lsblk -> to check for the disk
+
+
+
+Now go to snapshot -> select it -> actions -> create volume from snapshot
+
+Select same zone and create
+
+
+
+Now select it from volume - attach it with the instance
+
+
+
+Now lsblk
+
+blkid to check for file system
+
+file system is also copied
+
+
+
+mkdir /test
+
+
+
+mount /dev/xvdb /test/
+
+
+
+cd /test
+
+ll
+
+all data will be present
+
+
