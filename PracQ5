@@ -1,0 +1,58 @@
+Q Create a custom Vpc. Where you need to create two subnets like public and private, in public subnet I want to host my web server where my website is running and Private subnet my database is running. Database should not be reachable publicly
+Hosting a VPC -
+
+V - VPC -> cidr 10.0.0.0/16 I - IGW S - Subnet R - Route Table
+
+-Search VPC
+
+-Create VPC
+
+Vpc Setting -> vpc only - no ipv6 cidr -> give range 10.0.0.0/16 -> create
+FOR OHIO GIVE - 20.0.0.0/16
+Now make IGW(internet gateway)
+
+Name tag - devops-igw -> create
+
+Now go to subnet -:
+
+Create subnet -> -> devops-vpc -> give name -public subnet -> zone us-east-1a -> subnet cidr -> 10.0.0.0/24 -> create subnet
+
+FOR OHIO 20.0.0.0/24
+
+Create another subnet -> private subnet -> us-east-1b -> 10.0.1.0/24-> create
+
+FOR OHIO 20.0.1.0/24
+
+Now launch a instance- select devops-vpc - select public subnet -> enable auto assign public ip->allow port ssh 22 -> script if any -> launch instance
+
+Launch another instance - select devops-vpc ->select private subnet -> subnet cidr -> disable auto assign public ip -> 10.0.1.0/24 -> allow 22 -> launch instance
+
+Go to IGW -> select the igw -> attach to devops-vpc
+
+Go to Route tables -> create -> name it -> select devops vpc -> create -> edit route -> cidr 0.0.0.0/0 and add route internet gateway -> create
+
+edit subnet association -> edit and add public -> save
+
+Go to instance and allow ICMP ipv4 protocol in inbound rules -> save
+
+Connect the public machine in terminal
+
+Copy the content from the key pair in the computer.
+
+GO to the public machine vim devops-host.pem -> and paste the key save exit
+
+chmod 400 devops-host.pem
+
+ssh -i devops-host.pem ec2-user@privateip of private machine
+
+NOW YOU WILL BE CONNECTED TO THE PRIVATE MACHINE
+
+Now to use internet in private machine
+
+For this question Create a server in public 
+yum install httpd -y
+cd /var/www/html
+cat > index.html 
+systemctl start httpd
+systemctl enable httpd
+allow port 80 and http in instance security group (public)
