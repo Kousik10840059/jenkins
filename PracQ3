@@ -1,0 +1,76 @@
+Q configure a webserver in Mumbai region . I need same server in Singapore 
+
+Create a instance in aws
+
+set hostname
+
+yum install httpd -y
+
+rmpquery httpd
+
+cd /var/www/html
+
+cat > index.html
+
+cd
+
+systemctl start httpd
+
+systemctl enable httpd
+
+allow port 80 in inbound rules -> http
+
+copy public ip and paste ip:80
+select the instance
+
+click on actions
+
+image and templates
+
+create a image
+
+go to create image
+
+Keep the reboot instance to unticked
+
+delete on termination - untick
+
+then click on create AMI
+
+Now go to AMI and you will see your AMI created
+
+You can terminate the old instance ( if delete on termination was unticked)
+
+create new instance - select my ami and you will see your ami
+
+select it and go ahead
+
+copy the new ip and paste it on brower ip:80 and you will see the existing file that you created
+Go to images - AMIs
+
+select the AMI
+
+Click on actions -> copy AMI
+
+Choose new destination region ex. Ohio
+
+click on copy AMI
+
+and switch to Ohio region from the main menu drop down
+
+Check the AMI image -> and check on status until it becomes available
+
+AMI is a region based service.
+
+Again go to AMI - select the AMI scroll down and click on permissions
+
+Then edit AMI permission
+
+Add account id and paste the AWS account id of the one who you want to share
+
+Then apply
+
+search on private ami and you will find it
+
+Then deploy an instance using that AMI
+
