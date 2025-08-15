@@ -1,0 +1,84 @@
+Q => Create an ec2 instance like t3.micro in mumbai region in zone Ap-south-1-a and configure webserver and make it live and attach 5gb ebs volume and create 10 files like devops.txt
+
+Create a instance in aws
+
+set hostname
+
+yum install httpd -y
+
+rmpquery httpd
+
+cd /var/www/html
+
+cat > index.html
+
+cd
+
+systemctl start httpd
+
+systemctl enable httpd
+
+allow port 80 in inbound rules -> http
+
+copy public ip and paste ip:80
+Launch and connect instance
+
+run command - lsblk -> to check storage and partition
+
+GO to elastic block store in aws
+
+volumes - name it to vol1
+
+then create new volume (make sure to create in same availability zone)
+
+Select GP2 - size 5gb
+
+Now go to EBS - volumes
+
+select the new generate volume - action -> attach
+
+select instance hosted name
+
+attach
+
+Go to console
+
+lsblk -fs
+
+blkid
+
+file system command
+
+mkfs.ext4 /dev/xvdb --> formats the new disk - a for disk 1 b for disk 2 .. (here for us xvdb will xome as nvme something)
+
+blkid
+
+create a mount point
+
+mkdir /data
+
+mount /dev/xvdb /data/
+
+df -h - to check if storage is mounted
+
+cd /data/
+
+touch Sanjaya.txt{1..100} -> to create 100 files
+
+THIS WAS TEMPORARY MOUNTING for this question this is the end
+
+TO MAKE IT PERMANENT-.
+
+cd
+
+blkid -> copy the uuid of partition b
+
+open
+
+vim /etc/fstab/
+
+paste the uuid - to mount it permanenetly or by name - /dev/xvdb /data ext4 defaults 0 0
+
+it means mount xvdb to data folder using ext4 file system
+
+RESTART THE INSTANCE
