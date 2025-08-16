@@ -1,6 +1,8 @@
 Q Create a custom Vpc. Where you need to create two subnets like public and private, in public subnet I want to host my web server where my website is running and Private subnet my database is running. Database should not be reachable publicly
 Hosting a VPC -
 
+while creating instance allow icmpv4 for all
+
 V - VPC -> cidr 10.0.0.0/16 I - IGW S - Subnet R - Route Table
 
 -Search VPC
