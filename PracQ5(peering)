@@ -65,5 +65,7 @@ create
 Now go to ohio -> peering connection => you will find request (it will take time)
 ping "public ip of opposite server"  - to check the connection
 
+in route table of N,virginia add route of peering connection of ohio(viceversa).
+
 just for backup command
 (scp filename.txt root@publicipofohio:/tmp)
